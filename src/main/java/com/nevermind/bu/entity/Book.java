@@ -9,7 +9,6 @@ import javax.persistence.*;
  * Contains data about book(s) and write them
  */
 @Entity
-@Table(name = "BOOKS")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -29,9 +28,13 @@ public class Book {
     @Column(name = "PAGES", nullable = false)
     private int pages;
 
-    public Book(String name, String author, int pages) {
+    @Column(name = "Genre")
+    private String genre;
+
+    public Book(String name, String author, int pages, String genre) {
         this.name = name;
         this.author = author;
         this.pages = pages;
+        this.genre = genre;
     }
 }

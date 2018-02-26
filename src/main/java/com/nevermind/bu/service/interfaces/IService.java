@@ -1,4 +1,4 @@
-package com.nevermind.bu.service;
+package com.nevermind.bu.service.interfaces;
 
 import java.util.List;
 
