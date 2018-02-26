@@ -6,6 +6,8 @@ import java.util.List;
  * IService Class
  * Common class for other services that contains all basic operations :
  * Create, Read, Update, Delete
+ *
+ * @author Roman Kovaliov
  */
 public interface IService<T> {
 

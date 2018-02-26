@@ -1,18 +1,21 @@
 package com.nevermind.bu.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 /**
  * Book Entity Class
  * Contains data about book(s) and write them
+ *
+ * @author Roman Kovaliov
  */
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 public class Book {
 
     @Id
@@ -28,16 +31,29 @@ public class Book {
     @Column(name = "PAGES", nullable = false)
     private int pages;
 
-    @Column(name = "Genre")
+    @Column(name = "GENRE")
     private String genre;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Literature literature;
 
-    public Book(String name, String author, int pages, String genre) {
+    public Book(String name, String author, int pages, String genre, Literature literature) {
         this.name = name;
         this.author = author;
         this.pages = pages;
         this.genre = genre;
+        this.literature = literature;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", author='" + author + '\'' +
+                ", pages=" + pages +
+                ", genre='" + genre + '\'' +
+                ", literature=" + literature +
+                '}';
     }
 }

@@ -1,7 +1,6 @@
 package com.nevermind.bu.service;
 
 import com.nevermind.bu.dao.LiteratureDao;
-import com.nevermind.bu.entity.Book;
 import com.nevermind.bu.entity.Literature;
 import com.nevermind.bu.service.interfaces.LiteratureService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,8 @@ import java.util.List;
 
 /**
  * Implementation of {@link LiteratureService} interface.
+ *
+ * @author Roman Kovaliov
  */
 @Service
 public class LiteratureServiceImpl implements LiteratureService {
@@ -35,8 +36,8 @@ public class LiteratureServiceImpl implements LiteratureService {
     }
 
     @Override
-    public void save(Literature entity) {
-        literatureDao.save(entity);
+    public void save(Literature literature) {
+        literatureDao.save(literature);
     }
 
     @Override
@@ -45,7 +46,16 @@ public class LiteratureServiceImpl implements LiteratureService {
     }
 
     @Override
-    public void update(Literature entity) {
-        literatureDao.save(entity);
+    public void update(Literature literature) {
+        literatureDao.save(literature);
     }
+
+    @Override
+    public void updateById(int id, String name) {
+        literatureDao.setLiteratureInfoById(name, id);
+    }
+
+
+
+
 }

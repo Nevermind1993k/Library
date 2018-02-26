@@ -2,6 +2,7 @@ package com.nevermind.bu.service;
 
 import com.nevermind.bu.dao.BookDao;
 import com.nevermind.bu.entity.Book;
+import com.nevermind.bu.entity.Literature;
 import com.nevermind.bu.service.interfaces.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,8 @@ import java.util.List;
 
 /**
  * Implementation of {@link BookService} interface.
+ *
+ * @author Roman Kovaliov
  */
 @Service
 public class BookServiceImpl implements BookService {
@@ -45,5 +48,10 @@ public class BookServiceImpl implements BookService {
     @Override
     public void update(Book entity) {
         bookDao.save(entity);
+    }
+
+    @Override
+    public void updateById(int id, String name, String author, int pages, String genre, Literature literature) {
+        bookDao.setBookInfoById(name, author, pages, genre, literature, id);
     }
 }

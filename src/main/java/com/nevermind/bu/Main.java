@@ -1,36 +1,17 @@
 package com.nevermind.bu;
 
-import com.nevermind.bu.config.AppConfig;
-import com.nevermind.bu.entity.Book;
-import com.nevermind.bu.entity.Literature;
-import com.nevermind.bu.service.interfaces.BookService;
-import com.nevermind.bu.service.interfaces.LiteratureService;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import java.util.List;
+import com.nevermind.bu.util.ConsoleApplication;
 
 /**
  * Main class
+ *
+ * @author Roman Kovaliov
  */
 public class Main {
 
     public static void main(String[] args) {
 
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
-        LiteratureService literatureService = context.getBean(LiteratureService.class);
-        BookService bookService = context.getBean(BookService.class);
-
-
-        literatureService.save(new Literature("Russian"));
-        literatureService.save(new Literature("European"));
-        bookService.save(new Book("Philosophy of Java", "Bruce Eccel", 555,"Education"));
-        bookService.save(new Book("Hello", "World", 222,"Comedy"));
-        bookService.save(new Book("Hello2", "World2", 333,"Detective"));
-        bookService.save(new Book("Hello3", "World3", 444,"Fun"));
-
-
-
-        context.close();
+        ConsoleApplication.run();
     }
 }

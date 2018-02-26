@@ -18,6 +18,8 @@ import java.util.Properties;
 
 /**
  * Configuration for connection to DB.
+ *
+ * @author Roman Kovaliov
  */
 @Configuration
 @PropertySource(value = "classpath:db.properties")
