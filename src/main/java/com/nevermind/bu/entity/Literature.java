@@ -6,6 +6,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Literature Entity Class
@@ -24,6 +26,9 @@ public class Literature {
 
     @Column(name = "NAME")
     private String name;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<Book> books = new HashSet<>();
 
     public Literature(String name) {
         this.name = name;

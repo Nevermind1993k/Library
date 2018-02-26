@@ -29,13 +29,7 @@ public class Main {
         bookService.save(new Book("Hello2", "World2", 333,"Detective"));
         bookService.save(new Book("Hello3", "World3", 444,"Fun"));
 
-        List<Book> books = bookService.getAll();
-        for (Book book : books) {
-            System.out.println("Id = " + book.getId());
-            System.out.println("Name = " + book.getName());
-            System.out.println("Author = " + book.getAuthor());
-            System.out.println("Pages = " + book.getPages());
-        }
+
 
         context.close();
     }

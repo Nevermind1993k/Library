@@ -31,6 +31,9 @@ public class Book {
     @Column(name = "Genre")
     private String genre;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Literature literature;
+
     public Book(String name, String author, int pages, String genre) {
         this.name = name;
         this.author = author;
