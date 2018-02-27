@@ -12,26 +12,20 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * DAO class for {@link Book}.
+ * DAO class for {@link com.nevermind.bu.entity.Author}.
  * Reads and writes data in to DB
  *
  * @author Roman Kovaliov
  */
 @Repository
-public interface BookDao extends JpaRepository<Book, Integer> {
-    Book findById(int id);
+public interface AuthorDao extends JpaRepository<Author, Integer> {
+    Author findById(int id);
 
-    Book findByTitle(String title);
-
-    List<Book> findByAuthor(String authorName);
-
-    List<Book> findByGenre(String genreName);
-
-    List<Book> findByPagesBetween(int firstPage, int lastPage);
+    Author findByName(String name);
 
     @Modifying
     @Transactional
-    @Query("update Book set title = ?1, author=?2, pages=?3, genre=?4 where id = ?5")
-    void setBookInfoById(String title, Author author, int pages, String genre, int id);
+    @Query("update Author set name = ?1, literature=?2 where id = ?3")
+    void setAuthorInfoById(String name, Literature literature, int id);
 
 }

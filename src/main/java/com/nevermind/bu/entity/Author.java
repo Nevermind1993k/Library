@@ -3,37 +3,28 @@ package com.nevermind.bu.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 
-/**
- * Book Entity Class
- * Contains data about book(s) and write them
- *
- * @author Roman Kovaliov
- */
 @Entity
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
-public class Book {
+public class Author {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "NAME")
-    private String title;
+    private String name;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private Author author;
+    private Literature literature;
 
-    @Column(name = "PAGES", nullable = false)
-    private int pages;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "author", cascade = CascadeType.ALL)
+    private List<Book> books;
 
-    @Column(name = "GENRE")
-    private String genre;
 
 }

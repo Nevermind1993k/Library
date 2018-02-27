@@ -1,5 +1,6 @@
 package com.nevermind.bu.service.interfaces;
 
+import com.nevermind.bu.entity.Author;
 import com.nevermind.bu.entity.Book;
 import com.nevermind.bu.entity.Literature;
 
@@ -19,6 +20,6 @@ public interface BookService extends IService<Book> {
 
     List<Book> getByPages(int firstPage, int lastPage);
 
-    void updateById(int id, String name, String author, int pages, String genre, Literature literature);
+    void updateById(int id, String name, Author author, int pages, String genre);
 
 }

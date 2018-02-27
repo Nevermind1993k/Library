@@ -16,12 +16,10 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-//@ToString
 @NoArgsConstructor
 public class Literature {
 
     @Id
-    @Column(name = "ID", unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
@@ -29,22 +27,16 @@ public class Literature {
     private String name;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "literature", cascade = CascadeType.ALL)
-//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "BOOK_ID")
-    private List<Book> books;
-
-    public Literature(String name) {
-        this.name = name;
-    }
+    private List<Author> authors;
 
     @Override
     public String toString() {
         String str = "Literature{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", books=";
-        for (Book book : books) {
-            str += book.getName() + "; ";
+                ", authors=";
+        for (Author author : authors) {
+            str += author.getName() + "; ";
         }
         return str + "}";
     }

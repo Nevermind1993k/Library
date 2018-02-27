@@ -1,6 +1,7 @@
 package com.nevermind.bu.service;
 
 import com.nevermind.bu.dao.BookDao;
+import com.nevermind.bu.entity.Author;
 import com.nevermind.bu.entity.Book;
 import com.nevermind.bu.entity.Literature;
 import com.nevermind.bu.service.interfaces.BookService;
@@ -22,7 +23,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book getByName(String name) {
-        return bookDao.findByName(name);
+        return bookDao.findByTitle(name);
     }
 
     @Override
@@ -66,7 +67,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void updateById(int id, String name, String author, int pages, String genre, Literature literature) {
-        bookDao.setBookInfoById(name, author, pages, genre, literature, id);
+    public void updateById(int id, String name, Author author, int pages, String genre) {
+        bookDao.setBookInfoById(name, author, pages, genre, id);
     }
 }
