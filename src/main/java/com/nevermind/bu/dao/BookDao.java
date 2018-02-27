@@ -22,6 +22,12 @@ public interface BookDao extends JpaRepository<Book, Integer> {
 
     Book findByName(String name);
 
+    List<Book> findByAuthor(String authorName);
+
+    List<Book> findByGenre(String genreName);
+
+    List<Book> findByPagesBetween(int firstPage, int lastPage);
+
     @Modifying
     @Transactional
     @Query("update Book set name = ?1, author=?2, pages=?3, genre=?4, literature=?5  where id = ?6")

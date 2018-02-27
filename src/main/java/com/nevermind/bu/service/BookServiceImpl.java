@@ -26,6 +26,21 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public List<Book> getByAuthor(String authorName) {
+        return bookDao.findByAuthor(authorName);
+    }
+
+    @Override
+    public List<Book> getByGenre(String genreName) {
+        return bookDao.findByGenre(genreName);
+    }
+
+    @Override
+    public List<Book> getByPages(int firstPage, int lastPage) {
+        return bookDao.findByPagesBetween(firstPage, lastPage);
+    }
+
+    @Override
     public Book getById(int id) {
         return bookDao.findById(id);
     }

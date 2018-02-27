@@ -3,6 +3,8 @@ package com.nevermind.bu.service.interfaces;
 import com.nevermind.bu.entity.Book;
 import com.nevermind.bu.entity.Literature;
 
+import java.util.List;
+
 /**
  * Service interface for {@link Book}.
  *
@@ -11,6 +13,12 @@ import com.nevermind.bu.entity.Literature;
 public interface BookService extends IService<Book> {
     Book getByName(String name);
 
-    void updateById(int id,String name, String author, int pages, String genre, Literature literature);
+    List<Book> getByAuthor(String authorName);
+
+    List<Book> getByGenre(String genreName);
+
+    List<Book> getByPages(int firstPage, int lastPage);
+
+    void updateById(int id, String name, String author, int pages, String genre, Literature literature);
 
 }
