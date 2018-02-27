@@ -5,6 +5,7 @@ import com.nevermind.bu.entity.Author;
 import com.nevermind.bu.entity.Literature;
 import com.nevermind.bu.service.interfaces.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
  *
  * @author Roman Kovaliov
  */
+@Service
 public class AuthorServiceImpl implements AuthorService {
 
     @Autowired

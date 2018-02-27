@@ -29,15 +29,19 @@ public class Literature {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "literature", cascade = CascadeType.ALL)
     private List<Author> authors;
 
+    public Literature(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
-        String str = "Literature{" +
+        StringBuilder str = new StringBuilder("Literature{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", authors=";
+                ", authors=");
         for (Author author : authors) {
-            str += author.getName() + "; ";
+            str.append(author.getName()).append("; ");
         }
-        return str + "}";
+        return str.toString() + "}";
     }
 }

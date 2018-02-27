@@ -23,7 +23,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book getByName(String name) {
-        return bookDao.findByTitle(name);
+        return bookDao.findByName(name);
     }
 
     @Override

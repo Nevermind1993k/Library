@@ -25,7 +25,7 @@ public class Book {
     private int id;
 
     @Column(name = "NAME")
-    private String title;
+    private String name;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Author author;
@@ -36,4 +36,10 @@ public class Book {
     @Column(name = "GENRE")
     private String genre;
 
+    public Book(String name, Author author, int pages, String genre) {
+        this.name = name;
+        this.author = author;
+        this.pages = pages;
+        this.genre = genre;
+    }
 }
