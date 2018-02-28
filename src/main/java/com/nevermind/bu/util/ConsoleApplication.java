@@ -82,6 +82,7 @@ public class ConsoleApplication {
                     break;
                 }
                 case 2: {
+                    updateAuthor();
                     break;
                 }
                 case 3: {
@@ -94,6 +95,27 @@ public class ConsoleApplication {
     }
 
     /**
+     * Update Author
+     * Method that updates all author fields by id.
+     */
+    private static void updateAuthor() {
+        printAuthors(authorService.getAll());
+        System.out.print("Choose Id of author to update ->");
+        int authorId = Integer.parseInt(sc.nextLine());
+
+        System.out.print("Name ->");
+        String newName = sc.nextLine();
+
+        printLiterature(literatureService.getAll());
+        System.out.print("Choose literature for author by Id ->");
+        int litId = Integer.parseInt(sc.nextLine());
+
+        authorService.updateById(authorId, newName, literatureService.getById(litId));
+        System.out.println("Author was updated!");
+
+    }
+
+    /**
      * Update Literature
      * Method that updates all literature fields by id.
      */
@@ -101,11 +123,12 @@ public class ConsoleApplication {
         printLiterature(literatureService.getAll());
         System.out.print("Choose Id of literature to update ->");
         int litId = Integer.parseInt(sc.nextLine());
+
         System.out.print("Name ->");
         String newName = sc.nextLine();
+
         literatureService.updateById(litId, newName);
         System.out.println("Literature was updated!");
-
     }
 
     /**
