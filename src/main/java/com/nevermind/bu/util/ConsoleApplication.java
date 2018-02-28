@@ -35,7 +35,7 @@ public class ConsoleApplication {
 
         boolean runStatus = true;
 
-//        initBooks();
+        initBooks();
         while (runStatus) {
             greeting();
             System.out.print(" ->");
@@ -55,6 +55,7 @@ public class ConsoleApplication {
                         break;
                     }
                     case 4: {
+                        chooseCategoryForDelete();
                         break;
                     }
                     case 5: {
@@ -66,6 +67,44 @@ public class ConsoleApplication {
                 System.err.println("Not a number. Try again.");
             }
         }
+    }
+
+    /**
+     * Choose Category For Delete
+     * Method allows to navigate through subcategories for delete exist entities
+     */
+    private static void chooseCategoryForDelete() {
+        System.out.print("Choose one of the category for delete: \n 1.Literature \n 2.Author \n 3.Book \n ->");
+        try {
+            int category = Integer.parseInt(sc.nextLine());
+            switch (category) {
+                case 1: {
+                    deleteLiterature();
+                    break;
+                }
+                case 2: {
+                    break;
+                }
+                case 3: {
+                    break;
+                }
+            }
+        } catch (NumberFormatException ex) {
+            System.err.println("Not a number. Try again.");
+        }
+    }
+
+    /**
+     * Delete Literature
+     * Method deletes literature by id and related to it authors and books
+     */
+    private static void deleteLiterature() {
+        printLiterature(literatureService.getAll());
+        System.out.print("Choose Id of literature to delete ->");
+        int litId = Integer.parseInt(sc.nextLine());
+
+        literatureService.delete(litId);
+        System.out.println("Literature was deleted !");
     }
 
     /**
