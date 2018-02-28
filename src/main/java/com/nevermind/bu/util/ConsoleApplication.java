@@ -51,6 +51,7 @@ public class ConsoleApplication {
                         break;
                     }
                     case 3: {
+                        chooseCategoryForUpdate();
                         break;
                     }
                     case 4: {
@@ -68,7 +69,47 @@ public class ConsoleApplication {
     }
 
     /**
-     * Choose Category
+     * Choose Category For Update
+     * Method allows to navigate through subcategories for updating exist entities
+     */
+    private static void chooseCategoryForUpdate() {
+        System.out.print("Choose one of the category for update: \n 1.Literature \n 2.Author \n 3.Book \n ->");
+        try {
+            int category = Integer.parseInt(sc.nextLine());
+            switch (category) {
+                case 1: {
+                    updateLiterature();
+                    break;
+                }
+                case 2: {
+                    break;
+                }
+                case 3: {
+                    break;
+                }
+            }
+        } catch (NumberFormatException ex) {
+            System.err.println("Not a number. Try again.");
+        }
+    }
+
+    /**
+     * Update Literature
+     * Method that updates all literature fields by id.
+     */
+    private static void updateLiterature() {
+        printLiterature(literatureService.getAll());
+        System.out.print("Choose Id of literature to update ->");
+        int litId = Integer.parseInt(sc.nextLine());
+        System.out.print("Name ->");
+        String newName = sc.nextLine();
+        literatureService.updateById(litId, newName);
+        System.out.println("Literature was updated!");
+
+    }
+
+    /**
+     * Choose Category For Create
      * Method allows to navigate through subcategories for adding new entities
      */
     private static void chooseCategoryForCreate() {
@@ -214,7 +255,7 @@ public class ConsoleApplication {
     }
 
     /**
-     * Choose Category
+     * Choose Category For Print
      * Method allows to navigate through subcategories for printing information about entities
      */
     private static void chooseCategoryForPrint() {
