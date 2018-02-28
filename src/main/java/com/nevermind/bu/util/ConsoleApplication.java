@@ -86,9 +86,43 @@ public class ConsoleApplication {
                     break;
                 }
                 case 3: {
+                    updateBook();
                     break;
                 }
             }
+        } catch (NumberFormatException ex) {
+            System.err.println("Not a number. Try again.");
+        }
+    }
+
+    /**
+     * Update Book
+     * Method that updates all book fields by id.
+     */
+    private static void updateBook() {
+        printBooks(bookService.getAll());
+        try {
+
+
+            System.out.print("Choose Id of book to update ->");
+            int bookId = Integer.parseInt(sc.nextLine());
+
+            System.out.print("Name ->");
+            String newName = sc.nextLine();
+
+            System.out.print("Genre ->");
+            String newGenre = sc.nextLine();
+
+            System.out.print("Pages ->");
+            int newPages = Integer.parseInt(sc.nextLine());
+
+            printAuthors(authorService.getAll());
+            System.out.print("Choose author for book by Id ->");
+            int authorId = Integer.parseInt(sc.nextLine());
+
+            bookService.updateById(bookId, newName, authorService.getById(authorId), newPages, newGenre);
+            System.out.println("Book was updated!");
+
         } catch (NumberFormatException ex) {
             System.err.println("Not a number. Try again.");
         }
@@ -99,19 +133,24 @@ public class ConsoleApplication {
      * Method that updates all author fields by id.
      */
     private static void updateAuthor() {
-        printAuthors(authorService.getAll());
-        System.out.print("Choose Id of author to update ->");
-        int authorId = Integer.parseInt(sc.nextLine());
+        try {
+            printAuthors(authorService.getAll());
+            System.out.print("Choose Id of author to update ->");
+            int authorId = Integer.parseInt(sc.nextLine());
 
-        System.out.print("Name ->");
-        String newName = sc.nextLine();
+            System.out.print("Name ->");
+            String newName = sc.nextLine();
 
-        printLiterature(literatureService.getAll());
-        System.out.print("Choose literature for author by Id ->");
-        int litId = Integer.parseInt(sc.nextLine());
+            printLiterature(literatureService.getAll());
+            System.out.print("Choose literature for author by Id ->");
+            int litId = Integer.parseInt(sc.nextLine());
 
-        authorService.updateById(authorId, newName, literatureService.getById(litId));
-        System.out.println("Author was updated!");
+            authorService.updateById(authorId, newName, literatureService.getById(litId));
+            System.out.println("Author was updated!");
+
+        } catch (NumberFormatException ex) {
+            System.err.println("Not a number. Try again.");
+        }
 
     }
 
