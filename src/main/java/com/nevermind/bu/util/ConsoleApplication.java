@@ -35,16 +35,15 @@ public class ConsoleApplication {
 
         boolean runStatus = true;
 
-        greeting();
 //        initBooks();
-
-
         while (runStatus) {
-            System.out.print(" -> ");
+            greeting();
+            System.out.print(" ->");
             try {
                 int command = Integer.parseInt(sc.nextLine());
                 switch (command) {
                     case 1: {
+                        chooseCategoryForCreate();
                         break;
                     }
                     case 2: {
@@ -69,21 +68,157 @@ public class ConsoleApplication {
     }
 
     /**
+     * Choose Category
+     * Method allows to navigate through subcategories for adding new entities
+     */
+    private static void chooseCategoryForCreate() {
+        System.out.print("Choose one of the category for create: \n 1.Literature \n 2.Author \n 3.Book \n ->");
+        try {
+            int category = Integer.parseInt(sc.nextLine());
+            switch (category) {
+                case 1: {
+                    createLiterature();
+                    break;
+                }
+                case 2: {
+                    createAuthor();
+                    break;
+                }
+                case 3: {
+                    createBook();
+                    break;
+                }
+            }
+        } catch (NumberFormatException ex) {
+            System.err.println("Not a number. Try again.");
+        }
+    }
+
+    /**
+     * Create Book
+     * Method that checks if book name is unique.
+     * If it unique it's create new book.
+     */
+    private static void createBook() {
+        List<Book> existBooks = bookService.getAll();
+        Boolean uniqueName = true;
+
+        System.out.print("Name ->");
+        String name = sc.nextLine();
+
+        for (Book book : existBooks) {
+            if (name.equalsIgnoreCase(book.getName())) {
+                System.out.println("This book already exists. Try again.");
+                uniqueName = false;
+            }
+        }
+
+        if (uniqueName) {
+            Book book = new Book();
+
+            System.out.print("Genre ->");
+            String genre = sc.nextLine();
+
+            System.out.print("Pages ->");
+            int pages = Integer.parseInt(sc.nextLine());
+
+            printAuthors(authorService.getAll());
+            System.out.print("Choose author for book by Id ->");
+            int authorId = Integer.parseInt(sc.nextLine());
+
+            book.setName(name);
+            book.setGenre(genre);
+            book.setPages(pages);
+            book.setAuthor(authorService.getById(authorId));
+
+            bookService.save(book);
+            System.out.println(book.getName() + " was created!");
+        }
+
+    }
+
+    /**
+     * Create Author
+     * Method that checks if author name is unique.
+     * If it unique it's create new author.
+     */
+    private static void createAuthor() {
+        List<Author> existAuthors = authorService.getAll();
+        Boolean uniqueName = true;
+
+        System.out.print("Name ->");
+        String name = sc.nextLine();
+
+        for (Author author : existAuthors) {
+            if (name.equalsIgnoreCase(author.getName())) {
+                System.out.println("This author already exists. Try again.");
+                uniqueName = false;
+            }
+        }
+
+        if (uniqueName) {
+            Author author = new Author();
+            printLiterature(literatureService.getAll());
+            System.out.print("Choose literature for author by Id ->");
+            int litId = Integer.parseInt(sc.nextLine());
+
+            author.setName(name);
+            author.setLiterature(literatureService.getById(litId));
+
+            authorService.save(author);
+            System.out.println(author.getName() + " was created!");
+        }
+
+
+    }
+
+
+    /**
+     * Create Literature
+     * Method that checks if literature name is unique.
+     * If it unique it's create new literature.
+     */
+    private static void createLiterature() {
+        List<Literature> existLit = literatureService.getAll();
+        Boolean uniqueName = true;
+
+        System.out.print("Name ->");
+        String name = sc.nextLine();
+
+        for (Literature literature : existLit) {
+            if (name.equalsIgnoreCase(literature.getName())) {
+                System.out.println("This literature already exist. Try again.");
+                uniqueName = false;
+            }
+        }
+
+        if (uniqueName) {
+            Literature literature = new Literature();
+            literature.setName(name);
+            literatureService.save(literature);
+            System.out.println(literature.getName() + " Literature was created!");
+        }
+
+
+    }
+
+
+    /**
      * Greeting
      * Show instructions how to use the console application
      */
     private static void greeting() {
-        System.out.print("Welcome to library! \n " +
+        System.out.print("\nWelcome to library! \n " +
                 "Commands : \n 1.Add \n 2.Select \n 3.Update \n 4.Delete \n 5.Exit \n ");
 
     }
 
     /**
      * Choose Category
-     * Method method allows to navigate through subcategories
+     * Method allows to navigate through subcategories for printing information about entities
      */
     private static void chooseCategoryForPrint() {
-        System.out.print("Choose one of the category for print: \n 1.Literature \n 2.Authors \n 3.Books \n -> ");
+        System.out.print("Choose one of the category for print: \n 1.Literature \n 2.Authors \n 3.Books \n ->");
         try {
             int category = Integer.parseInt(sc.nextLine());
             switch (category) {
@@ -113,9 +248,7 @@ public class ConsoleApplication {
      */
     private static void printLiterature(List<Literature> literatureList) {
         if (literatureList != null) {
-            for (int i = 0; i < literatureList.size(); i++) {
-                System.out.println(" " + i + "  : " + literatureList.get(i));
-            }
+            literatureList.forEach(System.out::println);
         }
     }
 
@@ -126,18 +259,18 @@ public class ConsoleApplication {
      * @return list of literature
      */
     private static List<Literature> selectLiterature() {
-        System.out.print(" Select by : \n 1.All \n 2.Name \n  -> ");
+        System.out.print(" Select by : \n 1.All \n 2.Name \n  ->");
         List<Literature> literatureToReturn = new ArrayList<>();
         try {
             int type = Integer.parseInt(sc.nextLine());
             switch (type) {
                 case 1: {
-                    System.out.print(" All Literature -> ");
+                    System.out.print(" All Literature ->");
                     literatureToReturn = literatureService.getAll();
                     return literatureToReturn;
                 }
                 case 2: {
-                    System.out.print(" Name -> ");
+                    System.out.print(" Name ->");
                     String literatureName = sc.nextLine();
                     literatureToReturn.add(literatureService.getByName(literatureName));
                     return literatureToReturn;
@@ -157,9 +290,7 @@ public class ConsoleApplication {
      */
     private static void printAuthors(List<Author> authors) {
         if (authors != null) {
-            for (int i = 0; i < authors.size(); i++) {
-                System.out.println(" " + i + "  : " + authors.get(i));
-            }
+            authors.forEach(System.out::println);
         }
     }
 
@@ -170,18 +301,18 @@ public class ConsoleApplication {
      * @return list of authors
      */
     private static List<Author> selectAuthors() {
-        System.out.print(" Select by : \n 1.All \n 2.Name \n  -> ");
+        System.out.print(" Select by : \n 1.All \n 2.Name \n  ->");
         List<Author> authorsToReturn = new ArrayList<>();
         try {
             int type = Integer.parseInt(sc.nextLine());
             switch (type) {
                 case 1: {
-                    System.out.print(" All Authors -> ");
+                    System.out.print(" All Authors ->");
                     authorsToReturn = authorService.getAll();
                     return authorsToReturn;
                 }
                 case 2: {
-                    System.out.print(" Name -> ");
+                    System.out.print(" Name ->");
                     String authorName = sc.nextLine();
                     authorsToReturn.add(authorService.getByName(authorName));
                     return authorsToReturn;
@@ -202,9 +333,7 @@ public class ConsoleApplication {
      */
     private static void printBooks(List<Book> books) {
         if (books != null) {
-            for (int i = 0; i < books.size(); i++) {
-                System.out.println(" " + i + "  : " + books.get(i));
-            }
+            books.forEach(System.out::println);
         }
     }
 
@@ -216,39 +345,39 @@ public class ConsoleApplication {
      * @return list of books
      */
     private static List<Book> selectBooks() {
-        System.out.print(" Select by : \n 1.All \n 2.Name \n 3.Author \n 4.Genre \n 5.Pages \n -> ");
+        System.out.print(" Select by : \n 1.All \n 2.Name \n 3.Author \n 4.Genre \n 5.Pages \n ->");
         List<Book> booksToReturn = new ArrayList<>();
         try {
             int type = Integer.parseInt(sc.nextLine());
             switch (type) {
                 case 1: {
-                    System.out.print(" All Books -> ");
+                    System.out.print(" All Books ->");
                     booksToReturn = bookService.getAll();
                     return booksToReturn;
                 }
                 case 2: {
-                    System.out.print(" Name -> ");
+                    System.out.print(" Name ->");
                     String bookName = sc.nextLine();
                     booksToReturn.add(bookService.getByName(bookName));
                     return booksToReturn;
                 }
                 case 3: {
-                    System.out.print(" Author -> ");
+                    System.out.print(" Author ->");
                     String authorName = sc.nextLine();
                     booksToReturn = bookService.getByAuthor(authorName);
                     return booksToReturn;
                 }
                 case 4: {
-                    System.out.print(" Genre -> ");
+                    System.out.print(" Genre ->");
                     String genreName = sc.nextLine();
                     booksToReturn = bookService.getByGenre(genreName);
                     return booksToReturn;
                 }
                 case 5: {
                     System.out.print(" Pages : \n" +
-                            " Enter first page of search range -> ");
+                            " Enter first page of search range ->");
                     int firstPage = sc.nextInt();
-                    System.out.print("Enter last page of search range -> ");
+                    System.out.print("Enter last page of search range ->");
                     int lastPage = sc.nextInt();
                     booksToReturn = bookService.getByPages(firstPage, lastPage);
                     return booksToReturn;
@@ -257,7 +386,7 @@ public class ConsoleApplication {
         } catch (NumberFormatException ex) {
             System.err.println("Not a number. Try again");
         }
-        return new ArrayList<Book>();
+        return new ArrayList<>();
     }
 
 

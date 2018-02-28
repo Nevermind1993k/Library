@@ -8,6 +8,9 @@ import com.nevermind.bu.entity.Literature;
  * @author Roman Kovaliov
  */
 public interface LiteratureService extends IService<Literature> {
+
+    Literature getById(int id);
+
     Literature getByName(String name);
 
     void updateById(int id, String name);
