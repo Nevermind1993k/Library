@@ -83,9 +83,11 @@ public class ConsoleApplication {
                     break;
                 }
                 case 2: {
+                    deleteAuthor();
                     break;
                 }
                 case 3: {
+                    deleteBook();
                     break;
                 }
             }
@@ -95,16 +97,73 @@ public class ConsoleApplication {
     }
 
     /**
+     * Delete Book
+     * Method deletes book by id
+     */
+    private static void deleteBook() {
+        try {
+            printBooks(bookService.getAll());
+            System.out.print("Choose Id of book to delete ->");
+            int bookId = Integer.parseInt(sc.nextLine());
+
+            Book book = bookService.getById(bookId);
+            book.setAuthor(null);
+
+            bookService.update(book);
+            bookService.delete(book.getId());
+            System.out.println("Book was removed!");
+        } catch (NumberFormatException ex) {
+            System.err.println("Not a number. Try again.");
+        }
+    }
+
+    /**
+     * Delete Author
+     * Method deletes author by id
+     */
+    private static void deleteAuthor() {
+        try {
+            printAuthors(authorService.getAll());
+            System.out.print("Choose Id of author to delete ->");
+            int authorId = Integer.parseInt(sc.nextLine());
+            Author author = authorService.getById(authorId);
+
+            for (Book book : author.getBooks()) {
+                book.setAuthor(null);
+            }
+            author.getBooks().clear();
+            author.setLiterature(null);
+
+            authorService.update(author);
+            authorService.delete(author.getId());
+            System.out.println("Author was removed!");
+        } catch (NumberFormatException ex) {
+            System.err.println("Not a number. Try again.");
+        }
+    }
+
+    /**
      * Delete Literature
-     * Method deletes literature by id and related to it authors and books
+     * Method deletes literature by id
      */
     private static void deleteLiterature() {
-        printLiterature(literatureService.getAll());
-        System.out.print("Choose Id of literature to delete ->");
-        int litId = Integer.parseInt(sc.nextLine());
+        try {
+            printLiterature(literatureService.getAll());
+            System.out.print("Choose Id of literature to delete ->");
+            int litId = Integer.parseInt(sc.nextLine());
+            Literature literature = literatureService.getById(litId);
 
-        literatureService.delete(litId);
-        System.out.println("Literature was deleted !");
+            for (Author author : literature.getAuthors()) {
+                author.setLiterature(null);
+            }
+            literature.getAuthors().clear();
+
+            literatureService.update(literature);
+            literatureService.delete(literature.getId());
+            System.out.println("Literature was deleted !");
+        } catch (NumberFormatException ex) {
+            System.err.println("Not a number. Try again.");
+        }
     }
 
     /**
@@ -557,7 +616,6 @@ public class ConsoleApplication {
         bookService.save(new Book("It", author3, 400, "Novel"));
         bookService.save(new Book("Shining", author3, 500, "Novel"));
 
-        context.close();
     }
 
 }
