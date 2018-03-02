@@ -8,12 +8,15 @@ Simple library console application
   * Delete
   
 ## Navigate  :
-  * Navigate going by numbers : ![alt text](./screenshots/mainmenu.png )
+   Navigate going by numbers : ![alt text](./screenshots/mainmenu.png )
   
-  * If you going to find book by name, type a string : ![alt text](./screenshots/inputString.png )
+   If you going to find book by name, type a string : ![alt text](./screenshots/inputString.png )
   
 ### Running :
-* Run the Main class.
+```
+Run the Main class.
+```
+ 
 
 ### Tests :
 To run tests type into command line : 
