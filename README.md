@@ -8,11 +8,9 @@ Simple library console application
   * Delete
   
 ## Navigate  :
-  * Navigate going by numbers :
-  * ![alt text](C:\Users\Roman\Desktop\0b2e49e388a54de9b184e564796a154f.png "Navigate going by numbers")
-  *
-  * If you going to find book by name, type a string :
-  * 
+  * Navigate going by numbers : ![alt text](./screenshots/mainmenu.png )
+  
+  * If you going to find book by name, type a string : ![alt text](./screenshots/inputString.png )
   
 ## Built With
 
