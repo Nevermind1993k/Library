@@ -12,6 +12,15 @@ Simple library console application
   
   * If you going to find book by name, type a string : ![alt text](./screenshots/inputString.png )
   
+### Running :
+* Run the Main class.
+
+### Tests :
+To run tests type into command line : 
+```
+mvn clean test
+```
+ 
 ## Built With
 
 * [Spring](https://spring.io/) - The web framework used
