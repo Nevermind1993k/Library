@@ -34,6 +34,8 @@ public class ConsoleApplication {
     public static void run() {
 
         boolean runStatus = true;
+        int category;
+
 
         initBooks();
         while (runStatus) {
@@ -43,19 +45,31 @@ public class ConsoleApplication {
                 int command = Integer.parseInt(sc.nextLine());
                 switch (command) {
                     case 1: {
-                        chooseCategoryForCreate();
+                        System.out.print("Choose one of the category for create:" +
+                                " \n 1.Literature \n 2.Author \n 3.Book \n ->");
+                        category = Integer.parseInt(sc.nextLine());
+                        chooseCategoryForCreate(category);
                         break;
                     }
                     case 2: {
-                        chooseCategoryForPrint();
+                        System.out.print("Choose one of the category for print:" +
+                                " \n 1.Literature \n 2.Authors \n 3.Books \n ->");
+                        category = Integer.parseInt(sc.nextLine());
+                        chooseCategoryForPrint(category);
                         break;
                     }
                     case 3: {
-                        chooseCategoryForUpdate();
+                        System.out.print("Choose one of the category for update:" +
+                                " \n 1.Literature \n 2.Author \n 3.Book \n ->");
+                        category = Integer.parseInt(sc.nextLine());
+                        chooseCategoryForUpdate(category);
                         break;
                     }
                     case 4: {
-                        chooseCategoryForDelete();
+                        System.out.print("Choose one of the category for delete:" +
+                                " \n 1.Literature \n 2.Author \n 3.Book \n ->");
+                        category = Integer.parseInt(sc.nextLine());
+                        chooseCategoryForDelete(category);
                         break;
                     }
                     case 5: {
@@ -72,11 +86,11 @@ public class ConsoleApplication {
     /**
      * Choose Category For Delete
      * Method allows to navigate through subcategories for delete exist entities
+     *
+     * @param category - number of category
      */
-    private static void chooseCategoryForDelete() {
-        System.out.print("Choose one of the category for delete: \n 1.Literature \n 2.Author \n 3.Book \n ->");
+    private static void chooseCategoryForDelete(int category) {
         try {
-            int category = Integer.parseInt(sc.nextLine());
             switch (category) {
                 case 1: {
                     deleteLiterature();
@@ -169,11 +183,11 @@ public class ConsoleApplication {
     /**
      * Choose Category For Update
      * Method allows to navigate through subcategories for updating exist entities
+     *
+     * @param category - number of category
      */
-    private static void chooseCategoryForUpdate() {
-        System.out.print("Choose one of the category for update: \n 1.Literature \n 2.Author \n 3.Book \n ->");
+    private static void chooseCategoryForUpdate(int category) {
         try {
-            int category = Integer.parseInt(sc.nextLine());
             switch (category) {
                 case 1: {
                     updateLiterature();
@@ -269,13 +283,14 @@ public class ConsoleApplication {
     }
 
     /**
+     * /**
      * Choose Category For Create
      * Method allows to navigate through subcategories for adding new entities
+     *
+     * @param category - number of category
      */
-    private static void chooseCategoryForCreate() {
-        System.out.print("Choose one of the category for create: \n 1.Literature \n 2.Author \n 3.Book \n ->");
+    private static void chooseCategoryForCreate(int category) {
         try {
-            int category = Integer.parseInt(sc.nextLine());
             switch (category) {
                 case 1: {
                     createLiterature();
@@ -417,11 +432,11 @@ public class ConsoleApplication {
     /**
      * Choose Category For Print
      * Method allows to navigate through subcategories for printing information about entities
+     *
+     * @param category - number of category
      */
-    private static void chooseCategoryForPrint() {
-        System.out.print("Choose one of the category for print: \n 1.Literature \n 2.Authors \n 3.Books \n ->");
+    private static void chooseCategoryForPrint(int category) {
         try {
-            int category = Integer.parseInt(sc.nextLine());
             switch (category) {
                 case 1: {
                     printLiterature(selectLiterature());
